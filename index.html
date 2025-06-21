@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gearbox Fundamentals - Interactive Learning Platform</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-cog"></i>
+                <span>Gearbox Fundamentals</span>
+            </div>
+            <nav class="nav">
+                <a href="#dashboard" class="nav-link active">Dashboard</a>
+                <a href="#calculator" class="nav-link">Calculator</a>
+                <a href="#animations" class="nav-link">Animations</a>
+                <a href="#workshops" class="nav-link">Workshops</a>
+            </nav>
+            <div class="profile">
+                <i class="fas fa-user-circle"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Dashboard Section -->
+        <section id="dashboard" class="section active">
+            <div class="container">
+                <div class="welcome-banner">
+                    <h1>Welcome to Gearbox Fundamentals</h1>
+                    <p>Master the mechanics of gear systems through interactive learning</p>
+                </div>
+
+                <!-- Learning Path -->
+                <div class="learning-path">
+                    <h2>Learning Path</h2>
+                    <div class="path-steps">
+                        <div class="step completed">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h3>Introduction</h3>
+                                <p>Basic concepts</p>
+                            </div>
+                        </div>
+                        <div class="step completed">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h3>Manual Transmission</h3>
+                                <p>How gears engage</p>
+                            </div>
+                        </div>
+                        <div class="step current">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h3>Gear Ratios</h3>
+                                <p>Interactive calculator</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <h3>CVT Systems</h3>
+                                <p>Continuous variation</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">5</div>
+                            <div class="step-content">
+                                <h3>Applications</h3>
+                                <p>Real-world usage</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Access Cards -->
+                <div class="quick-access">
+                    <h2>Quick Access</h2>
+                    <div class="cards-grid">
+                        <div class="card" onclick="showSection('calculator')">
+                            <i class="fas fa-calculator"></i>
+                            <h3>Gear Calculator</h3>
+                            <p>Interactive ratio calculations</p>
+                        </div>
+                        <div class="card" onclick="showSection('animations')">
+                            <i class="fas fa-play-circle"></i>
+                            <h3>Animations</h3>
+                            <p>Visual gear mechanics</p>
+                        </div>
+                        <div class="card" onclick="showSection('workshops')">
+                            <i class="fas fa-tools"></i>
+                            <h3>Workshops</h3>
+                            <p>Hands-on practice</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Calculator Section -->
+        <section id="calculator" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h1>🔧 Interactive Gear Ratio Calculator</h1>
+                    <p>Explore how different gear combinations affect speed and torque</p>
+                </div>
+
+                <div class="calculator-container">
+                    <!-- Gear Visualization -->
+                    <div class="gear-visualization">
+                        <div class="gear-pair">
+                            <div class="gear input-gear">
+                                <div class="gear-circle" id="inputGear">
+                                    <div class="gear-teeth"></div>
+                                    <div class="gear-center"></div>
+                                </div>
+                                <div class="gear-label">
+                                    <h3>Input Gear</h3>
+                                    <span id="inputTeethDisplay">20</span> teeth
+                                </div>
+                            </div>
+                            <div class="gear-connection">
+                                <i class="fas fa-arrow-right"></i>
+                            </div>
+                            <div class="gear output-gear">
+                                <div class="gear-circle" id="outputGear">
+                                    <div class="gear-teeth"></div>
+                                    <div class="gear-center"></div>
+                                </div>
+                                <div class="gear-label">
+                                    <h3>Output Gear</h3>
+                                    <span id="outputTeethDisplay">60</span> teeth
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Controls -->
+                    <div class="calculator-controls">
+                        <div class="control-group">
+                            <label for="inputTeeth">Input Gear Teeth:</label>
+                            <input type="range" id="inputTeeth" min="10" max="100" value="20" class="slider">
+                            <span class="slider-value" id="inputValue">20</span>
+                        </div>
+                        <div class="control-group">
+                            <label for="outputTeeth">Output Gear Teeth:</label>
+                            <input type="range" id="outputTeeth" min="10" max="100" value="60" class="slider">
+                            <span class="slider-value" id="outputValue">60</span>
+                        </div>
+                    </div>
+
+                    <!-- Results -->
+                    <div class="results-panel">
+                        <h3>📊 Results</h3>
+                        <div class="results-grid">
+                            <div class="result-item">
+                                <div class="result-label">Gear Ratio</div>
+                                <div class="result-value" id="gearRatio">1:3</div>
+                            </div>
+                            <div class="result-item">
+                                <div class="result-label">Speed Change</div>
+                                <div class="result-value" id="speedChange">3x slower</div>
+                            </div>
+                            <div class="result-item">
+                                <div class="result-label">Torque Change</div>
+                                <div class="result-value" id="torqueChange">3x stronger</div>
+                            </div>
+                        </div>
+                        <div class="practical-example" id="practicalExample">
+                            <strong>Real-world example:</strong> Like using first gear in a car - more torque for climbing hills, but lower top speed.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Animations Section -->
+        <section id="animations" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h1>🎬 Interactive Animations</h1>
+                    <p>Visual learning through animated demonstrations</p>
+                </div>
+
+                <div class="animation-cards">
+                    <div class="animation-card">
+                        <div class="animation-preview">
+                            <div class="gear-animation-demo">
+                                <div class="demo-gear gear1"></div>
+                                <div class="demo-gear gear2"></div>
+                            </div>
+                        </div>
+                        <div class="animation-info">
+                            <h3>Manual Transmission</h3>
+                            <p>See how gears engage and disengage in a manual transmission system</p>
+                            <button class="btn-primary">Watch Animation</button>
+                        </div>
+                    </div>
+
+                    <div class="animation-card">
+                        <div class="animation-preview">
+                            <div class="cvt-animation-demo">
+                                <div class="cvt-belt"></div>
+                                <div class="cvt-pulley primary"></div>
+                                <div class="cvt-pulley secondary"></div>
+                            </div>
+                        </div>
+                        <div class="animation-info">
+                            <h3>CVT System</h3>
+                            <p>Understand continuous variable transmission with smooth ratio changes</p>
+                            <button class="btn-primary">Watch Animation</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Workshops Section -->
+        <section id="workshops" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h1>🛠️ Practical Workshops</h1>
+                    <p>Hands-on learning with real-world applications</p>
+                </div>
+
+                <div class="workshop-grid">
+                    <div class="workshop-card">
+                        <div class="workshop-header">
+                            <i class="fas fa-car"></i>
+                            <h3>Automotive Gearbox Design</h3>
+                        </div>
+                        <div class="workshop-content">
+                            <p>Design a complete gearbox for different vehicle types</p>
+                            <div class="workshop-features">
+                                <span class="feature">Interactive CAD</span>
+                                <span class="feature">Performance Analysis</span>
+                                <span class="feature">Cost Optimization</span>
+                            </div>
+                        </div>
+                        <button class="btn-secondary">Start Workshop</button>
+                    </div>
+
+                    <div class="workshop-card">
+                        <div class="workshop-header">
+                            <i class="fas fa-bicycle"></i>
+                            <h3>Bicycle Gear Systems</h3>
+                        </div>
+                        <div class="workshop-content">
+                            <p>Explore multi-speed bicycle transmission systems</p>
+                            <div class="workshop-features">
+                                <span class="feature">Derailleur Systems</span>
+                                <span class="feature">Hub Gears</span>
+                                <span class="feature">Efficiency Analysis</span>
+                            </div>
+                        </div>
+                        <button class="btn-secondary">Start Workshop</button>
+                    </div>
+
+                    <div class="workshop-card">
+                        <div class="workshop-header">
+                            <i class="fas fa-cogs"></i>
+                            <h3>Industrial Applications</h3>
+                        </div>
+                        <div class="workshop-content">
+                            <p>Heavy machinery and industrial gear systems</p>
+                            <div class="workshop-features">
+                                <span class="feature">Load Calculations</span>
+                                <span class="feature">Material Selection</span>
+                                <span class="feature">Safety Factors</span>
+                            </div>
+                        </div>
+                        <button class="btn-secondary">Start Workshop</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html> 
