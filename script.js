@@ -55,7 +55,7 @@ const updateActiveNavLink = (clickedLink = null) => {
  */
 const initializeGoogleAuth = () => {
     window.google.accounts.id.initialize({
-        client_id: "YOUR_GOOGLE_CLIENT_ID", // Replace with your actual client ID
+        client_id: "120198566642-aeqbm64odquin83oh73oa4heint84uu4.apps.googleusercontent.com",
         callback: handleGoogleSignIn
     });
 
