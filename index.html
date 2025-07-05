@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 <body>
     <!-- Header -->
@@ -23,7 +24,12 @@
                 <a href="#workshops" class="nav-link">Workshops</a>
             </nav>
             <div class="profile">
-                <i class="fas fa-user-circle"></i>
+                <div id="google-signin" class="google-signin"></div>
+                <div id="user-profile" class="user-profile" style="display: none;">
+                    <img id="user-avatar" src="" alt="Profile" class="user-avatar">
+                    <span id="user-name"></span>
+                    <button id="logout-btn" class="logout-btn">Logout</button>
+                </div>
             </div>
         </div>
     </header>

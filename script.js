@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeNavigation();
     initializeGearCalculator();
     initializeAnimations();
+    initializeGoogleAuth();
     showSection('dashboard');
 });
 
@@ -47,6 +48,82 @@ const updateActiveNavLink = (clickedLink = null) => {
             link.classList.add('active');
         }
     });
+};
+
+/**
+ * Google Authentication System
+ */
+const initializeGoogleAuth = () => {
+    window.google.accounts.id.initialize({
+        client_id: "YOUR_GOOGLE_CLIENT_ID", // Replace with your actual client ID
+        callback: handleGoogleSignIn
+    });
+
+    window.google.accounts.id.renderButton(
+        document.getElementById("google-signin"),
+        { 
+            theme: "outline", 
+            size: "large",
+            text: "sign_in_with",
+            shape: "rectangular"
+        }
+    );
+
+    document.getElementById('logout-btn').addEventListener('click', handleLogout);
+    
+    // Check for existing session
+    setTimeout(checkExistingSession, 100);
+};
+
+const handleGoogleSignIn = (response) => {
+    const responsePayload = decodeJwtResponse(response.credential);
+    
+    // Show user profile
+    document.getElementById('google-signin').style.display = 'none';
+    document.getElementById('user-profile').style.display = 'flex';
+    
+    // Update profile info
+    document.getElementById('user-avatar').src = responsePayload.picture;
+    document.getElementById('user-name').textContent = responsePayload.name;
+    
+    // Store user info
+    localStorage.setItem('userProfile', JSON.stringify(responsePayload));
+    
+    showNotification(`Welcome, ${responsePayload.given_name}!`, 'success');
+};
+
+const handleLogout = () => {
+    // Clear user data
+    localStorage.removeItem('userProfile');
+    
+    // Update UI
+    document.getElementById('google-signin').style.display = 'block';
+    document.getElementById('user-profile').style.display = 'none';
+    
+    // Sign out from Google
+    window.google.accounts.id.disableAutoSelect();
+    
+    showNotification('Logged out successfully', 'info');
+};
+
+const decodeJwtResponse = (token) => {
+    const base64Url = token.split('.')[1];
+    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+    return JSON.parse(jsonPayload);
+};
+
+const checkExistingSession = () => {
+    const userProfile = localStorage.getItem('userProfile');
+    if (userProfile) {
+        const profile = JSON.parse(userProfile);
+        document.getElementById('google-signin').style.display = 'none';
+        document.getElementById('user-profile').style.display = 'flex';
+        document.getElementById('user-avatar').src = profile.picture;
+        document.getElementById('user-name').textContent = profile.name;
+    }
 };
 
 /**
