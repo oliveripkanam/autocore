@@ -26,13 +26,49 @@
             <div class="profile">
                 <div id="google-signin" class="google-signin"></div>
                 <div id="user-profile" class="user-profile" style="display: none;">
-                    <img id="user-avatar" src="" alt="Profile" class="user-avatar">
-                    <span id="user-name"></span>
+                    <img id="user-avatar" src="" alt="Profile" class="user-avatar" onclick="showProfileModal()">
+                    <span id="user-name" onclick="showProfileModal()"></span>
                     <button id="logout-btn" class="logout-btn">Logout</button>
                 </div>
             </div>
         </div>
     </header>
+
+    <!-- Profile Modal -->
+    <div id="profile-modal" class="profile-modal" style="display: none;">
+        <div class="profile-modal-content">
+            <div class="profile-modal-header">
+                <h2>User Profile</h2>
+                <button class="close-modal" onclick="hideProfileModal()">&times;</button>
+            </div>
+            <div class="profile-modal-body">
+                <div class="profile-info">
+                    <img id="modal-user-avatar" src="" alt="Profile" class="modal-avatar">
+                    <div class="profile-details">
+                        <h3 id="modal-user-name"></h3>
+                        <p id="modal-user-email"></p>
+                    </div>
+                </div>
+                <div class="profile-stats">
+                    <div class="stat">
+                        <span class="stat-label">Learning Progress</span>
+                        <span class="stat-value">60%</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-label">Workshops Completed</span>
+                        <span class="stat-value">3/5</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-label">Current Level</span>
+                        <span class="stat-value">Intermediate</span>
+                    </div>
+                </div>
+            </div>
+            <div class="profile-modal-footer">
+                <button class="btn-secondary" onclick="hideProfileModal()">Close</button>
+            </div>
+        </div>
+    </div>
 
     <!-- Main Content -->
     <main class="main">

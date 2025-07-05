@@ -127,6 +127,36 @@ const checkExistingSession = () => {
 };
 
 /**
+ * Profile Modal System
+ */
+const showProfileModal = () => {
+    const userProfile = localStorage.getItem('userProfile');
+    if (userProfile) {
+        const profile = JSON.parse(userProfile);
+        
+        // Update modal content
+        document.getElementById('modal-user-avatar').src = profile.picture;
+        document.getElementById('modal-user-name').textContent = profile.name;
+        document.getElementById('modal-user-email').textContent = profile.email;
+        
+        // Show modal
+        document.getElementById('profile-modal').style.display = 'flex';
+    }
+};
+
+const hideProfileModal = () => {
+    document.getElementById('profile-modal').style.display = 'none';
+};
+
+// Close modal when clicking outside
+document.addEventListener('click', (e) => {
+    const modal = document.getElementById('profile-modal');
+    if (e.target === modal) {
+        hideProfileModal();
+    }
+});
+
+/**
  * Gear Calculator System
  */
 const initializeGearCalculator = () => {
