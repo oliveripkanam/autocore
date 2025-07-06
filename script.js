@@ -149,8 +149,13 @@ const showUserProfile = (profileData) => {
     document.getElementById('signin-buttons').style.display = 'none';
     document.getElementById('user-profile').style.display = 'flex';
     
-    // Update profile info
-    document.getElementById('user-avatar').src = profileData.picture;
+    // Update profile info with fallback image handling
+    const avatarElement = document.getElementById('user-avatar');
+    avatarElement.src = profileData.picture;
+    avatarElement.onerror = () => {
+        avatarElement.src = 'grayicon.png';
+    };
+    
     document.getElementById('user-name').textContent = profileData.name;
     
     // Store user info
@@ -195,7 +200,14 @@ const checkExistingSession = () => {
         const profile = JSON.parse(userProfile);
         document.getElementById('signin-buttons').style.display = 'none';
         document.getElementById('user-profile').style.display = 'flex';
-        document.getElementById('user-avatar').src = profile.picture;
+        
+        // Set avatar with fallback handling
+        const avatarElement = document.getElementById('user-avatar');
+        avatarElement.src = profile.picture;
+        avatarElement.onerror = () => {
+            avatarElement.src = 'grayicon.png';
+        };
+        
         document.getElementById('user-name').textContent = profile.name;
     }
 };
@@ -208,8 +220,13 @@ const showProfileModal = () => {
     if (userProfile) {
         const profile = JSON.parse(userProfile);
         
-        // Update modal content
-        document.getElementById('modal-user-avatar').src = profile.picture;
+        // Update modal content with fallback image handling
+        const modalAvatarElement = document.getElementById('modal-user-avatar');
+        modalAvatarElement.src = profile.picture;
+        modalAvatarElement.onerror = () => {
+            modalAvatarElement.src = 'grayicon.png';
+        };
+        
         document.getElementById('modal-user-name').textContent = profile.name;
         document.getElementById('modal-user-email').textContent = profile.email;
         
