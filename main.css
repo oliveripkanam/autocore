@@ -1,0 +1,8 @@
+/* Main CSS - Imports all organized stylesheets */
+@import url('shared/styles/variables.css');
+@import url('shared/styles/layout.css');
+@import url('shared/styles/components.css');
+@import url('features/dashboard/dashboard.css');
+@import url('features/calculator/calculator.css');
+@import url('features/animations/animations.css');
+@import url('features/workshops/workshops.css'); 

@@ -1,0 +1,65 @@
+/* Workshops Styles */
+.workshop-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-6);
+}
+
+.workshop-card {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    padding: var(--spacing-6);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.workshop-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+
+.workshop-header {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-4);
+    margin-bottom: var(--spacing-4);
+}
+
+.workshop-header i {
+    font-size: var(--font-size-2xl);
+    color: var(--primary-blue);
+}
+
+.workshop-header h3 {
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+    color: var(--gray-900);
+}
+
+.workshop-content p {
+    color: var(--gray-600);
+    margin-bottom: var(--spacing-4);
+}
+
+.workshop-features {
+    margin-bottom: var(--spacing-6);
+}
+
+.workshop-features ul {
+    list-style: none;
+    padding: 0;
+}
+
+.feature {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    margin-bottom: var(--spacing-2);
+    color: var(--gray-700);
+}
+
+.feature::before {
+    content: '✓';
+    color: var(--primary-green);
+    font-weight: bold;
+} 

@@ -7,3 +7,5 @@ TODO:
 2. simplify code (especially styles.css)
 
 3. tbc
+
+NOTE: to run locally just do 'python -m http.server 3000'

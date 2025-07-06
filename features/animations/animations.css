@@ -1,0 +1,117 @@
+/* Animations Styles */
+.animation-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-6);
+    margin-bottom: var(--spacing-8);
+}
+
+.animation-card {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.animation-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+
+.animation-preview {
+    height: 200px;
+    background: var(--gray-50);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.gear-animation-demo {
+    display: flex;
+    gap: var(--spacing-4);
+    align-items: center;
+}
+
+.demo-gear {
+    width: 60px;
+    height: 60px;
+    border: 3px solid var(--primary-blue);
+    border-radius: 50%;
+    position: relative;
+    animation: rotateGear 3s linear infinite;
+}
+
+.gear1 {
+    animation-duration: 2s;
+}
+
+.gear2 {
+    animation-direction: reverse;
+}
+
+.cvt-animation-demo {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-6);
+    position: relative;
+}
+
+.cvt-belt {
+    width: 120px;
+    height: 4px;
+    background: var(--gray-600);
+    position: absolute;
+    border-radius: var(--radius-sm);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+
+.cvt-pulley {
+    width: 40px;
+    height: 40px;
+    border: 3px solid var(--primary-green);
+    border-radius: 50%;
+    position: relative;
+    animation: rotatePulley 2s linear infinite;
+    background: var(--white);
+    z-index: 2;
+}
+
+.cvt-pulley.primary {
+    animation-duration: 1.5s;
+}
+
+.cvt-pulley.secondary {
+    animation-duration: 2.5s;
+}
+
+.animation-info {
+    padding: var(--spacing-6);
+}
+
+.animation-info h3 {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    color: var(--gray-900);
+    margin-bottom: var(--spacing-2);
+}
+
+.animation-info p {
+    color: var(--gray-600);
+    margin-bottom: var(--spacing-4);
+}
+
+@keyframes rotateGear {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes rotatePulley {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+} 
