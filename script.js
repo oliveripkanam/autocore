@@ -69,39 +69,113 @@ const initializeGoogleAuth = () => {
         }
     );
 
+    // Initialize Microsoft Auth
+    initializeMicrosoftAuth();
+
     document.getElementById('logout-btn').addEventListener('click', handleLogout);
     
     // Check for existing session
     setTimeout(checkExistingSession, 100);
 };
 
+/**
+ * Microsoft Authentication System
+ */
+let msalInstance;
+
+const initializeMicrosoftAuth = () => {
+    const msalConfig = {
+        auth: {
+            clientId: "0294a24b-c318-48fb-8256-ebd582bb07e7",
+            authority: "https://login.microsoftonline.com/common",
+            redirectUri: window.location.origin
+        }
+    };
+
+    msalInstance = new msal.PublicClientApplication(msalConfig);
+
+    document.getElementById('microsoft-signin').addEventListener('click', handleMicrosoftSignIn);
+};
+
+const handleMicrosoftSignIn = async () => {
+    try {
+        const loginRequest = {
+            scopes: ["openid", "profile", "User.Read"]
+        };
+
+        const response = await msalInstance.loginPopup(loginRequest);
+        
+        // Get user profile from Microsoft Graph
+        const graphResponse = await fetch('https://graph.microsoft.com/v1.0/me', {
+            headers: {
+                'Authorization': `Bearer ${response.accessToken}`
+            }
+        });
+        
+        const userProfile = await graphResponse.json();
+        
+        // Format user data to match Google format
+        const profileData = {
+            name: userProfile.displayName,
+            email: userProfile.mail || userProfile.userPrincipalName,
+            picture: `https://graph.microsoft.com/v1.0/me/photo/$value`,
+            provider: 'microsoft'
+        };
+
+        showUserProfile(profileData);
+        
+    } catch (error) {
+        console.error('Microsoft sign-in error:', error);
+        showNotification('Microsoft sign-in failed', 'error');
+    }
+};
+
 const handleGoogleSignIn = (response) => {
     const responsePayload = decodeJwtResponse(response.credential);
     
-    // Show user profile
-    document.getElementById('google-signin').style.display = 'none';
+    // Format user data
+    const profileData = {
+        name: responsePayload.name,
+        email: responsePayload.email,
+        picture: responsePayload.picture,
+        provider: 'google'
+    };
+
+    showUserProfile(profileData);
+};
+
+const showUserProfile = (profileData) => {
+    // Hide sign-in buttons
+    document.getElementById('signin-buttons').style.display = 'none';
     document.getElementById('user-profile').style.display = 'flex';
     
     // Update profile info
-    document.getElementById('user-avatar').src = responsePayload.picture;
-    document.getElementById('user-name').textContent = responsePayload.name;
+    document.getElementById('user-avatar').src = profileData.picture;
+    document.getElementById('user-name').textContent = profileData.name;
     
     // Store user info
-    localStorage.setItem('userProfile', JSON.stringify(responsePayload));
+    localStorage.setItem('userProfile', JSON.stringify(profileData));
     
-    showNotification(`Welcome, ${responsePayload.given_name}!`, 'success');
+    const firstName = profileData.name.split(' ')[0];
+    showNotification(`Welcome, ${firstName}!`, 'success');
 };
 
-const handleLogout = () => {
+const handleLogout = async () => {
+    const userProfile = JSON.parse(localStorage.getItem('userProfile'));
+    
     // Clear user data
     localStorage.removeItem('userProfile');
     
     // Update UI
-    document.getElementById('google-signin').style.display = 'block';
+    document.getElementById('signin-buttons').style.display = 'flex';
     document.getElementById('user-profile').style.display = 'none';
     
-    // Sign out from Google
-    window.google.accounts.id.disableAutoSelect();
+    // Sign out from respective service
+    if (userProfile?.provider === 'microsoft' && msalInstance) {
+        await msalInstance.logoutPopup();
+    } else if (userProfile?.provider === 'google') {
+        window.google.accounts.id.disableAutoSelect();
+    }
     
     showNotification('Logged out successfully', 'info');
 };
@@ -119,7 +193,7 @@ const checkExistingSession = () => {
     const userProfile = localStorage.getItem('userProfile');
     if (userProfile) {
         const profile = JSON.parse(userProfile);
-        document.getElementById('google-signin').style.display = 'none';
+        document.getElementById('signin-buttons').style.display = 'none';
         document.getElementById('user-profile').style.display = 'flex';
         document.getElementById('user-avatar').src = profile.picture;
         document.getElementById('user-name').textContent = profile.name;

@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="https://alcdn.msauth.net/browser/2.38.0/js/msal-browser.min.js"></script>
 </head>
 <body>
     <!-- Header -->
@@ -24,7 +25,12 @@
                 <a href="#workshops" class="nav-link">Workshops</a>
             </nav>
             <div class="profile">
-                <div id="google-signin" class="google-signin"></div>
+                <div id="signin-buttons" class="signin-buttons">
+                    <div id="google-signin" class="google-signin"></div>
+                    <button id="microsoft-signin" class="microsoft-signin">
+                        <i class="fab fa-microsoft"></i> Sign in with Microsoft
+                    </button>
+                </div>
                 <div id="user-profile" class="user-profile" style="display: none;">
                     <img id="user-avatar" src="" alt="Profile" class="user-avatar" onclick="showProfileModal()">
                     <span id="user-name" onclick="showProfileModal()"></span>

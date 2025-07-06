@@ -130,6 +130,34 @@ body {
     gap: var(--spacing-3);
 }
 
+.signin-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2);
+}
+
+.microsoft-signin {
+    background: #0078d4;
+    color: white;
+    border: none;
+    padding: var(--spacing-2) var(--spacing-3);
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    transition: all 0.2s ease;
+    min-width: 200px;
+    justify-content: center;
+}
+
+.microsoft-signin:hover {
+    background: #106ebe;
+    transform: translateY(-1px);
+}
+
 .user-profile {
     display: flex;
     align-items: center;
