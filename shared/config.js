@@ -1,11 +1,11 @@
 /**
- * Configuration file for Gearbox Fundamentals Platform
+ * Configuration file for AutoCore Platform
  */
 
 const PLATFORM_CONFIG = {
     // Application metadata
     app: {
-        name: "Gearbox Fundamentals",
+        name: "AutoCore",
         version: "1.0.0",
         description: "Interactive Learning Platform for Gear Mechanics"
     },

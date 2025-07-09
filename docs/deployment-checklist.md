@@ -16,8 +16,6 @@
 
 ## Cross-browser Testing
 - [ ] Works in Chrome
-- [ ] Works in Firefox
-- [ ] Works in Safari
 - [ ] Works in Edge
 
 ## Mobile Responsiveness

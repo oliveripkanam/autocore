@@ -21,11 +21,13 @@ body {
 
 /* Header */
 .header {
-    background: var(--white);
-    box-shadow: var(--shadow-sm);
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--gray-200);
     position: sticky;
     top: 0;
     z-index: 100;
+    transition: all var(--transition-base);
 }
 
 .header .container {
@@ -42,6 +44,11 @@ body {
     font-size: var(--font-size-xl);
     font-weight: 700;
     color: var(--primary-blue);
+    transition: transform var(--transition-base);
+}
+
+.logo:hover {
+    transform: scale(1.02);
 }
 
 .logo i {
@@ -50,26 +57,45 @@ body {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    animation: rotate 4s linear infinite;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }
 
 .nav {
     display: flex;
-    gap: var(--spacing-6);
+    gap: var(--spacing-3);
+    background: var(--gray-50);
+    padding: var(--spacing-1);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
 }
 
 .nav-link {
     text-decoration: none;
     color: var(--gray-600);
     font-weight: 500;
+    font-size: var(--font-size-sm);
     padding: var(--spacing-2) var(--spacing-4);
     border-radius: var(--radius-md);
-    transition: all 0.2s ease;
+    transition: all var(--transition-base);
+    position: relative;
 }
 
-.nav-link:hover,
-.nav-link.active {
+.nav-link:hover {
     color: var(--primary-blue);
-    background: var(--light-blue);
+    background: var(--white);
+    box-shadow: var(--shadow-sm);
+    transform: translateY(-1px);
+}
+
+.nav-link.active {
+    color: var(--white);
+    background: var(--gradient-primary);
+    box-shadow: var(--shadow-md);
 }
 
 /* Main Content */

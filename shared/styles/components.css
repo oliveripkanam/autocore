@@ -12,25 +12,43 @@
 }
 
 .microsoft-signin {
-    background: #0078d4;
+    background: linear-gradient(135deg, #0078d4, #106ebe);
     color: white;
     border: none;
-    padding: var(--spacing-2) var(--spacing-3);
-    border-radius: var(--radius-md);
+    padding: var(--spacing-3) var(--spacing-4);
+    border-radius: var(--radius-lg);
     font-size: var(--font-size-sm);
-    font-weight: 500;
+    font-weight: 600;
     cursor: pointer;
     display: flex;
     align-items: center;
     gap: var(--spacing-2);
-    transition: all 0.2s ease;
+    transition: all var(--transition-base);
     min-width: 200px;
     justify-content: center;
+    box-shadow: var(--shadow-sm);
+    position: relative;
+    overflow: hidden;
+}
+
+.microsoft-signin::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.microsoft-signin:hover::before {
+    left: 100%;
 }
 
 .microsoft-signin:hover {
-    background: #106ebe;
-    transform: translateY(-1px);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
 }
 
 .user-profile {
@@ -38,8 +56,15 @@
     align-items: center;
     gap: var(--spacing-2);
     padding: var(--spacing-2) var(--spacing-3);
-    background: var(--light-blue);
-    border-radius: var(--radius-md);
+    background: var(--gradient-card);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius-lg);
+    transition: all var(--transition-base);
+}
+
+.user-profile:hover {
+    box-shadow: var(--shadow-sm);
+    border-color: var(--light-blue);
 }
 
 .user-profile span {
@@ -203,63 +228,120 @@
 /* Buttons */
 .btn-primary, .btn-secondary {
     padding: var(--spacing-3) var(--spacing-6);
-    border: none;
-    border-radius: var(--radius-md);
-    font-weight: 500;
+    border-radius: var(--radius-lg);
+    font-size: var(--font-size-sm);
+    font-weight: 600;
     cursor: pointer;
-    transition: all 0.2s ease;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: var(--spacing-2);
+    transition: all var(--transition-base);
+    border: none;
+    position: relative;
+    overflow: hidden;
 }
 
 .btn-primary {
-    background: var(--primary-blue);
-    color: white;
+    background: var(--gradient-primary);
+    color: var(--white);
+    box-shadow: var(--shadow-sm);
+}
+
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.btn-primary:hover::before {
+    left: 100%;
 }
 
 .btn-primary:hover {
-    background: #1E40AF;
-}
-
-.btn-secondary {
-    background: var(--gray-200);
-    color: var(--gray-900);
-}
-
-.btn-secondary:hover {
-    background: var(--gray-300);
-}
-
-/* Cards */
-.card {
-    background: var(--white);
-    border-radius: var(--radius-lg);
-    padding: var(--spacing-6);
-    box-shadow: var(--shadow-md);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    cursor: pointer;
-}
-
-.card:hover {
     transform: translateY(-2px);
     box-shadow: var(--shadow-lg);
 }
 
-.card i {
-    font-size: var(--font-size-2xl);
+.btn-secondary {
+    background: var(--white);
+    color: var(--gray-600);
+    border: 1px solid var(--gray-200);
+}
+
+.btn-secondary:hover {
     color: var(--primary-blue);
+    border-color: var(--light-blue);
+    background: var(--light-blue);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
+}
+
+/* Cards */
+.card {
+    background: var(--gradient-card);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-6);
+    text-align: center;
+    cursor: pointer;
+    transition: all var(--transition-base);
+    box-shadow: var(--shadow-sm);
+    position: relative;
+    overflow: hidden;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--gradient-primary);
+    transform: scaleX(0);
+    transition: transform var(--transition-base);
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg), var(--shadow-glow);
+    border-color: var(--light-blue);
+}
+
+.card:hover::before {
+    transform: scaleX(1);
+}
+
+.card i {
+    font-size: 2.5rem;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     margin-bottom: var(--spacing-4);
+    transition: transform var(--transition-base);
+}
+
+.card:hover i {
+    transform: scale(1.1);
 }
 
 .card h3 {
-    font-size: var(--font-size-xl);
+    margin: 0 0 var(--spacing-2) 0;
+    font-size: var(--font-size-lg);
     font-weight: 600;
-    margin-bottom: var(--spacing-2);
     color: var(--gray-900);
+    transition: color var(--transition-base);
+}
+
+.card:hover h3 {
+    color: var(--primary-blue);
 }
 
 .card p {
+    margin: 0;
     color: var(--gray-600);
+    font-size: var(--font-size-sm);
 } 
